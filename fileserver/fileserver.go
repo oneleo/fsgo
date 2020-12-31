@@ -112,8 +112,10 @@ func (fsrd *ReRender) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fs := http.StripPrefix(fsrd.HandlePattern, http.FileServer(http.Dir(fsrd.FileServerDir)))
 	fs.ServeHTTP(w, r)
 
-	// Render Footer
-	io.WriteString(w, footerTpl)
+	// Render Footer if target path is dir.
+	if d.IsDir() {
+		io.WriteString(w, footerTpl)
+	}
 }
 
 // RequestName returns a string name that serves HTTP requests by removing the given prefix from the request URL's Path and invoking the request r. The name is '/'-separated.
