@@ -48,14 +48,14 @@ func init() {
 
 	flag.Usage = func() {
 		// template: go help doc
-		fmt.Fprintf(os.Stderr, "Gofs is a small file server for Browsing specify local folder and files.\n")
-		fmt.Fprintf(os.Stderr, "Usage:\n\n\tgofs [-p port] [-f folder] [-b]\n\n")
+		fmt.Fprintf(os.Stderr, "FSGO is a small file server with ZIP compression function for Browsing specify local folder and files.\n")
+		fmt.Fprintf(os.Stderr, "Usage:\n\n\tfsgo [-p port] [-f folder] [-b]\n\n")
 		fmt.Fprintf(os.Stderr, "Flags:\n")
 		flag.PrintDefaults()
 		fmt.Fprintf(os.Stderr, "\nExamples:\n")
-		fmt.Fprintf(os.Stderr, "  gofs\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder.\n")
-		fmt.Fprintf(os.Stderr, "  gofs -b\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder, and \"auto-open\" in browser.\n")
-		fmt.Fprintf(os.Stderr, "  gofs -p 8081 -f ./www -b\n\tStart this file server listen on specify port \":8081\" for browse \"./www\" specify folder, and \"auto-open\" in browser.")
+		fmt.Fprintf(os.Stderr, "  fsgo\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder.\n")
+		fmt.Fprintf(os.Stderr, "  fsgo -b\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder, and \"auto-open\" in browser.\n")
+		fmt.Fprintf(os.Stderr, "  fsgo -p 8081 -f ./www -b\n\tStart this file server listen on specify port \":8081\" for browse \"./www\" specify folder, and \"auto-open\" in browser.")
 	}
 }
 

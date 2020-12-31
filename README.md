@@ -1,5 +1,5 @@
-# gofs
- Gofs is a small file server for Browsing specify local folder and files.
+# FSGO
+ FSGO is a small file server with ZIP compression function for Browsing specify local folder and files.
 
 ## PreRequire
 - Install [Git](https://git-scm.com/) - Distributed version control system.
@@ -9,41 +9,41 @@
 
 ## Install
 ```golang
-$> go get -u github.com/oneleo/gofs
-$> go install github.com/oneleo/gofs
+$> go get -u github.com/oneleo/fsgo
+$> go install github.com/oneleo/fsgo
 ```
 
 ## Usage
 1. Start this file server listen on default port `:80` for browse `./` current folder:
 ```bash
-$> gofs
+$> fsgo
 ```
 
 ![How to Use](./images/fsgo.gif "How to Use?")
 
 2. Start this file server listen on default port `:80` for browse `./` current folder, and `auto-open` in browser:
 ```bash
-$> gofs -b
+$> fsgo -b
 ```
 
 3. Start this file server listen on specified port `:8081` for browse specified `./www` folder, and `auto-open` in browser:
 ```bash
-$> gofs -p 8081 -f ./www -b
+$> fsgo -p 8081 -f ./www -b
 ```
 
 4. Help message
 ```bash
-$> gofs -h
+$> fsgo -h
 OR
-$> gofs --help
+$> fsgo --help
 ```
 
 ```text
-$> gofs -h
-Gofs is a small file server for Browsing specify local folder and files.
+$> fsgo -h
+FSGO is a small file server with ZIP compression function for Browsing specify local folder and files.
 Usage:
 
-        gofs [-p port] [-f folder] [-b]
+        fsgo [-p port] [-f folder] [-b]
 
 Flags:
   -b    Open URL in browser (shorthand)
@@ -53,11 +53,11 @@ Flags:
         Set listening port (shorthand) (default 80)
 
 Examples:
-  gofs
+  fsgo
         Start this file server listen on port ":80" for browse "./" current folder.
-  gofs -b
+  fsgo -b
         Start this file server listen on port ":80" for browse "./" current folder, and open in browser.
-  gofs -p 8081 -f ./www -b
+  fsgo -p 8081 -f ./www -b
         Start this file server listen on specify port ":8081" for browse "./www" specify folder, and open in browser.
 ```
 
