@@ -19,8 +19,6 @@ $> go install github.com/oneleo/fsgo
 $> fsgo
 ```
 
-![How to Use](./images/fsgo.gif "How to Use?")
-
 2. Start this file server listen on default port `:80` for browse `./` current folder, and `auto-open` in browser:
 ```bash
 $> fsgo -b
