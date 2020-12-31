@@ -60,6 +60,17 @@ Examples:
 ```
 
 ## References
-- [GitHub - Simple static file server](https://github.com/golang-id/gost)
-- [GitHub Gist - Open browser in golang](https://gist.github.com/hyg/9c4afcd91fe24316cbf0)
+- [Gist - Open browser in golang](https://gist.github.com/hyg/9c4afcd91fe24316cbf0)
 - [Stackoverflow - Start web server to open page in browser](https://stackoverflow.com/questions/39320371/how-start-web-server-to-open-page-in-browser-in-golang)
+- [Stackoverflow - How to efficiently concatenate strings in go](https://stackoverflow.com/questions/1760757/how-to-efficiently-concatenate-strings-in-go)
+- [Stackoverflow - How to prevent favicon.ico requests](https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests)
+- [Stackoverflow - Directory walker written in Go stops with file in use (locked) error](https://stackoverflow.com/questions/43128059/directory-walker-written-in-go-stops-with-file-in-use-locked-error)
+- [Stackoverflow - Golang FileServer with custom css](https://stackoverflow.com/questions/51881361/golang-fileserver-with-custom-css)
+- [Stackoverflow - Go Templates: Are Nested Ranges Possible](https://stackoverflow.com/questions/17509420/go-templates-are-nested-ranges-possible)
+- [2020/02/29 - Serving Static Sites with Go](https://www.alexedwards.net/blog/serving-static-sites-with-go)
+- [GitHub - Quickly spin up a file server](https://github.com/leninhasda/go-serve)
+- [GitHub - a simple static file server write in pure golang, support upload](https://github.com/hellojukay/httpfs)
+- [GitHub - Zmisgod: goTool/fileserver](https://github.com/zmisgod/goTool/tree/master/fileserver)
+- [GitHub - A simple file server with no dependencies](https://github.com/atakanozceviz/serve)
+- [GitHub - Simple static file server](https://github.com/golang-id/gost)
+- [Go Package - http](https://golang.org/pkg/net/http/)
