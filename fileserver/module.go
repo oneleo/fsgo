@@ -3,7 +3,7 @@ package fileserver
 import (
 	"archive/zip"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -68,7 +68,7 @@ func (s *Module) Compress(w http.ResponseWriter, r *http.Request) {
 				e := fmt.Errorf("%s %s", time.Now().Format("2006/01/02 15:04:05"), err.Error())
 				fmt.Println(e)
 				zipErrors = append(zipErrors, e)
-				// 使用者取消壓縮時會產生的 err，也是唯一在壓縮的過程中需要終止遍歷的 err，
+				// 使用者取消壓縮時會產生的 err，需終止遍歷。
 				return err
 			}
 			// 若此檔是捷徑，則取得它原來的檔名資訊
@@ -80,23 +80,39 @@ func (s *Module) Compress(w http.ResponseWriter, r *http.Request) {
 					e := fmt.Errorf("%s %s", time.Now().Format("2006/01/02 15:04:05"), err.Error())
 					fmt.Println(e)
 					zipErrors = append(zipErrors, e)
+					// 若無檔案讀取權限就換下一個檔案，無需拋出 err 使得遍歷中斷。
 					return nil
 				}
 				zw.Write([]byte(symlink))
 				// _, _ = io.Copy(zw, ioutil.NopCloser(bytes.NewBuffer([]byte(symlink))))
 			} else if !info.IsDir() { // Is file.
-				// rdc, err := os.Open(relatePath)
-				// defer rdc.Close()
-				// _, _ = io.Copy(zw, rdc)
-				// 將此檔的資料寫入對映空殼檔後壓縮
-				data, err := ioutil.ReadFile(relatePath)
+				// method 1:
+				// data, err := ioutil.ReadFile(relatePath)
+				// zw.Write(data)
+				// method 2:
+				// data, err := ioutil.ReadFile(relatePath)
+				// rdc := ioutil.NopCloser(bytes.NewBuffer(data))
+				// _, err = io.Copy(zw, rdc)
+				// method 3:
+				rdc, err := os.Open(relatePath)
+				defer rdc.Close()
 				if err != nil {
 					e := fmt.Errorf("%s %s", time.Now().Format("2006/01/02 15:04:05"), err.Error())
 					fmt.Println(e)
 					zipErrors = append(zipErrors, e)
+					// 若無檔案讀取權限就換下一個檔案，無需拋出 err 使得遍歷中斷。
 					return nil
 				}
-				zw.Write(data)
+				// 使用 os.Open() 而不使用效率高的 ioutil.ReadFile()，當 io.Copy() 過程中檔案因故無法讀取時，會丟出一個 err，使得壓縮會保留已讀取的檔案；
+				// 使用 ioutil.ReadFile() + ioutil.NopCloser(bytes.NewBuffer())，當 io.Copy() 過程中會丟出一個 panic 使得壓縮失敗。
+				_, err = io.Copy(zw, rdc)
+				if err != nil {
+					e := fmt.Errorf("%s %s", time.Now().Format("2006/01/02 15:04:05"), err.Error())
+					fmt.Println(e)
+					zipErrors = append(zipErrors, e)
+					// 當檔案寫入中途消失須立即拋出 err 以終止遍歷，否則會 panic。
+					return err
+				}
 			} else if info.IsDir() { // Is directory.
 				// _, _ = io.Copy(zw, ioutil.NopCloser(bytes.NewBuffer(nil)))
 				// 資料夾無需寫入資料，即保留空殼檔即可
