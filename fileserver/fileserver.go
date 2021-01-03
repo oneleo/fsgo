@@ -168,6 +168,10 @@ func RootPath(dir string) (rootPaths, rootPathName []string) {
 	clean := filepath.Clean(dir)
 	dp := strings.TrimLeft(clean, `/\`)
 	count := strings.Count(dp, `/`) + strings.Count(dp, `\`) + 1 // Has at least one root dir itselfe.
+	// Remove count of drive letter's trailing backslash
+	if v := filepath.VolumeName(dp); len(v) == 2 && v[1] == ':' {
+		count--
+	}
 	rootPaths = make([]string, count)
 	rootPathName = make([]string, count)
 	// Dir returns all but the last element of path, typically the path's directory.
