@@ -154,7 +154,7 @@ func main() {
 
 	// If '-b' flag is set, open URI in browser.
 	if *browse == true {
-		go openURI("http://" + ip + pt)
+		go openURI("http://" + ip + pt + handlePrefix)
 	}
 
 	// Start file server gracefully.

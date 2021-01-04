@@ -125,3 +125,81 @@ func TestRootPath(t *testing.T) {
 		})
 	}
 }
+
+func TestDirAddName(t *testing.T) {
+	type args struct {
+		dir  string
+		name string
+	}
+
+	type test struct {
+		name           string
+		args           args
+		wantRelatePath string
+		wantErr        bool
+	}
+
+	wintests := []test{
+		// TODO: Add test cases.
+		{
+			name: "Windows test 01",
+			args: args{
+				dir:  ".\\testdir\\",
+				name: "test.file",
+			},
+			wantRelatePath: "testdir\\test.file",
+			wantErr:        false,
+		},
+		{
+			name: "Windows test 02",
+			args: args{
+				dir:  "",
+				name: "testdir",
+			},
+			wantRelatePath: "testdir",
+			wantErr:        false,
+		},
+	}
+
+	unixtests := []test{
+		// TODO: Add test cases.
+		{
+			name: "Linux test 01",
+			args: args{
+				dir:  "./testdir/",
+				name: "test.file",
+			},
+			wantRelatePath: "testdir/test.file",
+			wantErr:        false,
+		},
+		{
+			name: "Linux test 02",
+			args: args{
+				dir:  "",
+				name: "testdir",
+			},
+			wantRelatePath: "testdir",
+			wantErr:        false,
+		},
+	}
+
+	var tests []test
+	if runtime.GOOS == "windows" {
+		tests = append(tests, wintests...)
+	} else {
+		tests = append(tests, unixtests...)
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotRelatePath, err := DirAddName(tt.args.dir, tt.args.name)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("DirAddName() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if gotRelatePath != tt.wantRelatePath {
+				t.Errorf("DirAddName() = %v, want %v", gotRelatePath, tt.wantRelatePath)
+			}
+		})
+	}
+}

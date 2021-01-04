@@ -157,6 +157,12 @@ func DirAddName(dir, name string) (relatePath string, err error) {
 		d = "."
 	}
 	relatePath = filepath.Join(d, filepath.FromSlash(path.Clean("/"+name)))
+	if debug {
+		fmt.Println("dir: ", dir)
+		fmt.Println("d: ", d)
+		fmt.Println("name: ", name)
+		fmt.Println("relatePath: ", relatePath)
+	}
 	if _, err := os.Stat(relatePath); os.IsNotExist(err) {
 		return "", fmt.Errorf("%s does not exist", relatePath)
 	}
