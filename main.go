@@ -55,7 +55,7 @@ func init() {
 		fmt.Fprintf(os.Stderr, "\nExamples:\n")
 		fmt.Fprintf(os.Stderr, "  fsgo\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder.\n")
 		fmt.Fprintf(os.Stderr, "  fsgo -b\n\tStart this file server listen on default port \":80\" for browse \"./\" current folder, and \"auto-open\" in browser.\n")
-		fmt.Fprintf(os.Stderr, "  fsgo -p 8081 -f ./www -b\n\tStart this file server listen on specify port \":8081\" for browse \"./www\" specify folder, and \"auto-open\" in browser.")
+		fmt.Fprintf(os.Stderr, "  fsgo -p 8081 -f ./www -b\n\tStart this file server listen on specify port \":8081\" for browse \"./www\" specify folder, and \"auto-open\" in browser.\n")
 	}
 }
 
