@@ -95,7 +95,6 @@ func (s *Module) Compress(w http.ResponseWriter, r *http.Request) {
 				// _, err = io.Copy(zw, rdc)
 				// method 3:
 				rdc, err := os.Open(relatePath)
-				defer rdc.Close()
 				if err != nil {
 					e := fmt.Errorf("%s %s", time.Now().Format("2006/01/02 15:04:05"), err.Error())
 					fmt.Println(e)
@@ -103,6 +102,7 @@ func (s *Module) Compress(w http.ResponseWriter, r *http.Request) {
 					// 若無檔案讀取權限就換下一個檔案，無需拋出 err 使得遍歷中斷。
 					return nil
 				}
+				defer rdc.Close()
 				// 使用 os.Open() 而不使用效率高的 ioutil.ReadFile()，當 io.Copy() 過程中檔案因故無法讀取時，會丟出一個 err，使得壓縮會保留已讀取的檔案；
 				// 使用 ioutil.ReadFile() + ioutil.NopCloser(bytes.NewBuffer())，當 io.Copy() 過程中會丟出一個 panic 使得壓縮失敗。
 				_, err = io.Copy(zw, rdc)
