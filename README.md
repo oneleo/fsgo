@@ -10,7 +10,6 @@
 ## Install
 ```golang
 $> go get -u github.com/oneleo/fsgo
-$> go install github.com/oneleo/fsgo
 ```
 
 ## Usage
