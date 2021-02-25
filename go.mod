@@ -4,4 +4,4 @@ go 1.15
 
 replace github.com/oneleo/fsgo/fileserver => ./fileserver
 
-require github.com/oneleo/fsgo/fileserver v0.0.0-00010101000000-000000000000
+require github.com/oneleo/fsgo/fileserver v0.0.0-20210119131517-be70b0f13a03
